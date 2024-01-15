@@ -1,0 +1,62 @@
+# Node.js
+node_modules
+
+# Next.js
+.next/
+out/
+
+# Yarn
+yarn-error.log
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor files
+.vscode/
+*.code-workspace
+*.sublime-workspace
+*.sublime-project
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Next.js build output
+/.next/
+
+# Custom Next.js server
+/server/
+
+# Logs
+*.log
+
+# User-specific files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+test-result.xml
+
+# Dependency directories
+.pnp/
+.pnp.js
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm packages
+node_modules/
