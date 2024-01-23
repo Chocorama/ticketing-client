@@ -4,6 +4,7 @@ import axios from 'axios';
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, seterrors] = useState([]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ export default () => {
         }
       );
 
+      if (response.status === 201) seterrors([]);
       console.log(response);
     } catch (error) {
       if (error) seterrors(error.response.data.errors);
@@ -50,7 +52,14 @@ export default () => {
         </div>
       </div>
       <button className='btn btn-primary'>Signup</button>
-            <button className="btn btn-primary">Signup</button>
+      <div>
+        <ul>
+          {errors &&
+            errors.map((error) => {
+              return <li>{error.message}</li>;
+            })}
+        </ul>
+      </div>
     </form>
   );
 };
