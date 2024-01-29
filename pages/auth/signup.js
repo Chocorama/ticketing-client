@@ -1,32 +1,26 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import Router from 'next/router';
+import useRequest from '../../hooks/use-request';
 
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, seterrors] = useState([]);
+  const { doRequest, errors } = useRequest({
+    url: '/api/users/signup',
+    method: 'post',
+    body: {
+      email,
+      password,
+    },
+    onSuccess: () => {
+      Router.push('/');
+    },
+  });
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        '/api/users/signup',
-        {
-          email,
-          password,
-        },
-        {
-          baseURL: 'https://ticketing.dev',
-        }
-      );
-
-      if (response.status === 201) seterrors([]);
-      console.log(response);
-    } catch (error) {
-      if (error) seterrors(error.response.data.errors);
-      console.log(error.response.data.errors);
-    }
+    doRequest();
   };
 
   return (
@@ -51,15 +45,8 @@ export default () => {
           />
         </div>
       </div>
+      {errors}
       <button className='btn btn-primary'>Signup</button>
-      <div>
-        <ul>
-          {errors &&
-            errors.map((error) => {
-              return <li>{error.message}</li>;
-            })}
-        </ul>
-      </div>
     </form>
   );
 };
